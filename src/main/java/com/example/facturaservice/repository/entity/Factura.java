@@ -1,15 +1,17 @@
 package com.example.facturaservice.repository.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
-@Setter
-@Getter
-@Document(collation = "factura")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Document
 public class Factura {
 
     @Id

@@ -3,9 +3,11 @@ package com.example.facturaservice.service;
 import com.example.facturaservice.dto.FacturaDTO;
 import com.example.facturaservice.mapper.FacturaMapper;
 import com.example.facturaservice.repository.FacturaRepository;
-import com.example.facturaservice.repository.entity.Factura;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -24,9 +26,9 @@ public class FacturaService {
         return facturaMapper.entityToDto(this.facturaRepository.findById(id).get());
     }
 
-    public Factura getOne(Integer id, String nombre) {
+    public List<FacturaDTO> getFacturasByNombre(String nombre) {
 
-        return this.facturaRepository.findByIdAndNombreUsuario(id, nombre).get();
+        return this.facturaRepository.findByNombreUsuario(nombre).stream().map(facturaMapper::entityToDto).collect(Collectors.toList());
     }
 
 }

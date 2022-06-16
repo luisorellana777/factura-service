@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @RestController
 public class FacturaController {
@@ -24,6 +26,14 @@ public class FacturaController {
     public ResponseEntity<FacturaDTO> getOneFactura(@PathVariable Integer idFactura) {
 
         final FacturaDTO one = this.facturaService.getOne(idFactura);
+
+        return new ResponseEntity<>(one, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/facturas/clientes/{nombreCliente}")
+    public ResponseEntity<List<FacturaDTO>> getOneFacturaByIdAndName(@PathVariable String nombreCliente) {
+
+        final List<FacturaDTO> one = this.facturaService.getFacturasByNombre(nombreCliente);
 
         return new ResponseEntity<>(one, HttpStatus.ACCEPTED);
     }
