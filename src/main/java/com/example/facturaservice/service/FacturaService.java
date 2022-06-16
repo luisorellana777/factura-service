@@ -1,6 +1,7 @@
 package com.example.facturaservice.service;
 
 import com.example.facturaservice.dto.FacturaDTO;
+import com.example.facturaservice.exception.NotFoundException;
 import com.example.facturaservice.mapper.FacturaMapper;
 import com.example.facturaservice.repository.FacturaRepository;
 import lombok.AllArgsConstructor;
@@ -31,4 +32,13 @@ public class FacturaService {
         return this.facturaRepository.findByNombreUsuario(nombre).stream().map(facturaMapper::entityToDto).collect(Collectors.toList());
     }
 
+    public void updateFactura(FacturaDTO facturaDto) {
+
+        if (!this.facturaRepository.existsById(facturaDto.getId())) {
+            throw NotFoundException.builder().message("Not Found: ".concat(facturaDto.getId().toString())).build();
+        } else {
+            this.facturaRepository.save(facturaMapper.dtoToEntity(facturaDto));
+        }
+
+    }
 }

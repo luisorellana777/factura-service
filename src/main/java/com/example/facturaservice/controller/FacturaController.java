@@ -37,4 +37,11 @@ public class FacturaController {
 
         return new ResponseEntity<>(one, HttpStatus.ACCEPTED);
     }
+
+    @PutMapping("/facturas")
+    public HttpStatus updateFacuta(@RequestBody FacturaDTO facturaDto) {
+
+        this.facturaService.updateFactura(facturaDto);
+        return HttpStatus.CREATED;
+    }
 }
